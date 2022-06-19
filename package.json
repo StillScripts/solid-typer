@@ -1,16 +1,17 @@
 {
   "name": "solid-typer",
   "description": "Add text-typing animations to a Solid.js app",
-  "author": "Daniel Still",
+  "keywords": ["solid", "typing", "typer", "typewriter", "animation", "solid-js"],
+  "author": "Daniel Still (https://github.com/StillScripts)",
   "contributors": [
     "Daniel Still"
   ],
   "license": "MIT",
   "version": "0.0.1",
-  "homepage": "https://github.com/StillScripts",
+  "homepage": "https://github.com/StillScripts/solid-typer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/StillScripts"
+    "url": "https://github.com/StillScripts/solid-typer"
   },
   "type": "module",
   "main": "dist/index.js",
