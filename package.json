@@ -1,7 +1,15 @@
 {
   "name": "solid-typer",
   "description": "Add text-typing animations to a Solid.js app",
-  "keywords": ["solid", "typing", "typer", "typewriter", "animation", "solid-js"],
+  "keywords": [
+    "solid",
+    "typing",
+    "typer",
+    "typewriter",
+    "animation",
+    "text",
+    "solid-js"
+  ],
   "author": "Daniel Still (https://github.com/StillScripts)",
   "contributors": [
     "Daniel Still"
