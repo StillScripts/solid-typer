@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount, Show } from "solid-js";
+import { Component, createSignal, onCleanup, onMount, Show } from "solid-js";
 import { TyperProps, TypewriterDirection } from "../types";
 //import "./styles.css";
 
@@ -43,6 +43,11 @@ const Typer: Component<TyperProps> = ({
     }
   });
 
+  onCleanup(() => {
+    // Cleanup component to end the loop when it is unmounted
+    setFinished(true);
+  });
+
   /**
    * Loop that runs continuously or until the typewrite is finished.
    * @param {number} intervalTime - The time of each timeout interval.
@@ -60,7 +65,7 @@ const Typer: Component<TyperProps> = ({
         }
       }, intervalTime);
     } else {
-      console.log("Program finished");
+      console.log("Typing finished");
     }
   }
 
