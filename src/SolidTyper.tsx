@@ -1,12 +1,29 @@
 import { Component, createSignal, onCleanup, onMount, Show } from "solid-js";
-import { TyperProps, TypewriterDirection } from "../types";
-//import "./styles.css";
+import { TyperProps, TypewriterDirection } from "./types";
 
 /**
- * A text typing animation with a variety of options for customisation
- * @param {TyperProps} props - The props used to customise the typewriter animation
+ * A component that displays a text typing animation with a variety of options
+ * for customisation.
+ *
+ * @param {TyperProps} props - The component props used to provide the text and
+ * customise the typewriter animation. Defined by the ```TyperProps``` interface.
+ *
+ * Example usage:
+ * ```jsx
+ * <SolidTyper text="Hello World" loop />
+ * ```
+ *
+ * Advanced usage:
+ * ```jsx
+ * <SolidTyper
+ *     text={[ "Wake up, Neo...", "The Matrix has you...", "Follow the white rabbit.","Knock, knock, Neo." ]}
+ *     backspaceSpeed={30}
+ *     typingSpeed={100}
+ *     onFinish={callback}
+ * />
+ * ```
  */
-const Typer: Component<TyperProps> = ({
+const SolidTyper: Component<TyperProps> = ({
   className,
   style,
   cursorClassName,
@@ -22,18 +39,18 @@ const Typer: Component<TyperProps> = ({
   onBackspaceEnd,
   onFinish
 }: TyperProps) => {
-  const singleLine: boolean = typeof text === "string";
+  const singleLine: boolean = typeof text === "string"; // Check if text props are an array (multiple lines) or a string (single line)
   const [currentText, setCurrentText] = createSignal<string>(""); // The current text displayed within the <span>
   const [currentLine, setCurrentLine] = createSignal<string>(""); // The current line selected from the text prop.
   const [currentLineIndex, setCurrentLineIndex] = createSignal<number>(0); // The index number used to select the current line.
-  const [direction, setDirection] = createSignal<TypewriterDirection>("forward");
-
+  const [direction, setDirection] = createSignal<TypewriterDirection>("forward"); // The current direction of the typewriter
   const [finished, setFinished] = createSignal(false); // Variable for when the typing has finished
-  const [paused, setPaused] = createSignal(false);
+  const [paused, setPaused] = createSignal(false); // Variable for when the typewriter is paused
 
   onMount(() => {
     // Initialise the current line
     setCurrentLine(typeof text === "string" ? text : text[0]);
+		// Run the typing time loop with or without a start delay
     if (startDelay) {
       setTimeout(() => {
         timeLoop(typingSpeed);
@@ -70,7 +87,7 @@ const Typer: Component<TyperProps> = ({
   }
 
   /**
-   * Run the typewriter
+   * Run a single typing animation, forwards or backwards
    */
   function typewrite() {
     if (direction() === "forward") {
@@ -81,8 +98,8 @@ const Typer: Component<TyperProps> = ({
   }
 
   /**
-   * A method which checks if the typewriter is at the end of the line and handle this
-   * appropriately.
+   * Control actions of the typewriter typing forwards. It adds a new character if typing should be continued,
+   * otherwise it changes direction to begin typing backward or calls the method to finish typing.
    */
   function handleForwardTyping() {
     // Currently typing forward, so check if it is at the end of the line.
@@ -156,4 +173,4 @@ const Typer: Component<TyperProps> = ({
   );
 };
 
-export default Typer;
+export default SolidTyper;
