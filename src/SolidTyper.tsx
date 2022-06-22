@@ -2,7 +2,7 @@ import { Component, createSignal, onCleanup, onMount, Show } from "solid-js";
 import { TyperProps, TypewriterDirection } from "./types";
 
 /**
- * A component that displays a text typing animation with a variety of options
+ * A Solid.js component that displays a text typing animation with a variety of options
  * for customisation.
  *
  * @param {TyperProps} props - The component props used to provide the text and
@@ -39,13 +39,20 @@ const SolidTyper: Component<TyperProps> = ({
   onBackspaceEnd,
   onFinish
 }: TyperProps) => {
-  const singleLine: boolean = typeof text === "string"; // Check if text props are an array (multiple lines) or a string (single line)
-  const [currentText, setCurrentText] = createSignal<string>(""); // The current text displayed within the <span>
-  const [currentLine, setCurrentLine] = createSignal<string>(""); // The current line selected from the text prop.
-  const [currentLineIndex, setCurrentLineIndex] = createSignal<number>(0); // The index number used to select the current line.
-  const [direction, setDirection] = createSignal<TypewriterDirection>("forward"); // The current direction of the typewriter
-  const [finished, setFinished] = createSignal(false); // Variable for when the typing has finished
-  const [paused, setPaused] = createSignal(false); // Variable for when the typewriter is paused
+	// Check if text props are an array (multiple lines) or a string (single line)
+  const singleLine: boolean = typeof text === "string";
+	// The current text displayed within the <span>
+  const [currentText, setCurrentText] = createSignal<string>("");
+	// The current line selected from the text prop.
+  const [currentLine, setCurrentLine] = createSignal<string>("");
+	// The index number used to select the current line.
+  const [currentLineIndex, setCurrentLineIndex] = createSignal<number>(0); 
+	// The current direction of the typewriter
+  const [direction, setDirection] = createSignal<TypewriterDirection>("forward"); 
+	// Variable for when the typing has finished
+  const [finished, setFinished] = createSignal(false);
+	// Variable for when the typewriter is paused
+  const [paused, setPaused] = createSignal(false);
 
   onMount(() => {
     // Initialise the current line
